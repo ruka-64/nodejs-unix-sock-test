@@ -12,12 +12,7 @@ client.on('data', (data) => {
 });
 client.on('end', () => {
   console.log('disconnected.');
-  console.log('reconnecting...');
-  while (client.readyState !== 'open') {
-    try {
-      client.connect();
-    } catch {}
-  }
+  process.exit(0);
 });
 client.on('error', (err) => {
   if (err.message.startsWith('connect ENOENT')) {
