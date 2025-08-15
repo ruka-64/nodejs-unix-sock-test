@@ -20,6 +20,10 @@ client.on('end', () => {
   }
 });
 client.on('error', (err) => {
+  if (err.message.startsWith('connect ENOENT')) {
+    console.log("Cannot find socket (server.js isn't running?");
+    process.exit(1);
+  }
   console.error('[err]', err.message);
 });
 
