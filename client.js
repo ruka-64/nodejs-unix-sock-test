@@ -12,9 +12,15 @@ client.on('data', (data) => {
 });
 client.on('end', () => {
   console.log('disconnected.');
+  console.log('reconnecting...');
+  while (client.readyState !== 'open') {
+    try {
+      client.connect();
+    } catch {}
+  }
 });
 client.on('error', (err) => {
-  console.error(err.message);
+  console.error('[err]', err.message);
 });
 
 let i = 0;
