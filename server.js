@@ -4,7 +4,7 @@ import net from 'net';
 
 const server = net.createServer((conn) => {
   console.log('Connected.');
-  conn.on('close', () => console.log('disconnected'));
+  conn.on('close', () => console.log('Disconnected.'));
   conn.on('data', (data) => {
     console.log('[data]', data.toString());
     if (data.toString() == 'close') {

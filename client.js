@@ -23,7 +23,7 @@ const connect = () => {
   client = net.createConnection(SOCK_PATH);
 
   client.on('connect', () => {
-    console.log('connected');
+    console.log('Connected.');
     reconnecting = false;
     msgInterval = setInterval(() => {
       client.write(`Count is ${i}`);
@@ -34,7 +34,7 @@ const connect = () => {
     console.log(data.toString());
   });
   client.on('end', () => {
-    console.log('disconnected.');
+    console.log('Disconnected.');
     clearInterval(msgInterval);
     msgInterval = null;
     reconnecting = true;
