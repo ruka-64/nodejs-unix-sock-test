@@ -42,7 +42,7 @@ const connect = () => {
   });
   client.on('error', (err) => {
     if (err.message.startsWith('connect ENOENT')) {
-      console.log("Cannot find socket (server.js isn't running?");
+      console.log('Cannot find socket (is server.js not running?)');
       if (reconnecting) {
         reconnectTimer = setTimeout(connect, reconect_delay);
         return;
