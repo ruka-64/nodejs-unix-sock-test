@@ -1,13 +1,17 @@
 import net from 'net';
 
 const SOCK_PATH = 'test.sock'; //? ./test.sock
-const delay = 1000;
+
+/** @type {net.Socket | null} */
 let client = null;
 
-let reconnecting = false;
+const reconect_delay = 1000;
+/** @type {NodeJS.Timeout | null} */
 let reconnectTimer = null;
+let reconnecting = false;
 
 let i = 0;
+/** @type {NodeJS.Timeout | null} */
 let msgInterval = null;
 
 const connect = () => {
@@ -34,13 +38,13 @@ const connect = () => {
     clearInterval(msgInterval);
     msgInterval = null;
     reconnecting = true;
-    reconnectTimer = setTimeout(connect, delay);
+    reconnectTimer = setTimeout(connect, reconect_delay);
   });
   client.on('error', (err) => {
     if (err.message.startsWith('connect ENOENT')) {
       console.log("Cannot find socket (server.js isn't running?");
       if (reconnecting) {
-        reconnectTimer = setTimeout(connect, delay);
+        reconnectTimer = setTimeout(connect, reconect_delay);
         return;
       }
       process.exit(1);
